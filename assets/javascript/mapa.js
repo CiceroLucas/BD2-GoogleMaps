@@ -1,3 +1,4 @@
+
 let map;
 let marker;
 
@@ -48,3 +49,15 @@ function salvar(){
     .catch(error => alert('Falha ao salvar!'));    
 
 }
+
+
+/*const locals = async() => {
+      const url = `http://localhost:3000/getPoint`
+      const dados = await fetch(url)
+      const coord = await dados.json()
+      console.log(coord)
+}
+
+locals()*/
+
+

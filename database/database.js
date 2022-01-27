@@ -10,8 +10,9 @@ const client = new Client({
 });
 
 client.connect()
-    .then(()=> console.log('Conectado!'))
-    .catch(err => console.log(err.stack));
+      .then(()=> console.log('Conectado!'))
+      .catch(err => console.log(err.stack));
+
 
 const addPonto = (request, response) =>{
     const {nome, lat, lng} = request.body;
@@ -28,6 +29,22 @@ const addPonto = (request, response) =>{
         });
 };
 
+
+const getPoint = (request, response) => {
+
+   const query = `SELECT ST_AsGeoJSON(localizacao) from ponto;`
+
+   client.query(query,(error, results) => {
+      if (error) {
+        response.status(400).send(error);
+        console.log(error);
+        return;
+      }
+      response.status(200).json(results.rows);
+    });
+};
+
 module.exports = {
-    addPonto
+    addPonto,
+    getPoint
 };
